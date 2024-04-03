@@ -1,0 +1,112 @@
+# Import libraries
+!pip install scipy
+from sqlalchemy import create_engine, text
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
+import seaborn as sns
+sns.set()
+
+import warnings
+warnings.filterwarnings("ignore")
+
+#  Mount google drive
+from google.colab import drive
+drive.mount('/content/drive')
+
+# Locate path from dataset folder (left menu) and paste below
+path = "/content/drive/MyDrive/Capstone III/Datasets/Ubran Bliss 2024/- train US new.csv"
+df = pd.read_csv(path)
+
+# View first 5 rows (first row is the header)
+df.head(5)
+
+# DataFrame Info (also used to load new DataFrame)
+def printDataFrame(df):
+  print('The shape of this DataFrame is {}'.format(df.shape))
+  print('The columns in this DataFrame are {}'.format(df.columns))
+  print('The info:')
+  print(df.info())
+
+# Examine DataFrame
+df.info()
+
+# DataFrame size
+print(df.size)
+
+# DataFrame (rows,columns)
+df.shape
+
+#Clean Data - drop NaN rows (not needed)
+#clean_projects = projects_df.dropna()
+
+#Hypotheses 1: Correlation between green space, air quality and happiness scores
+
+Hypotheses 1: Statisitics
+
+def series_statistics(column):
+  print('statistics for column: {}'.format(column.name))
+  print('The max value in the column: {}'.format(column.max()))
+  print('The min value in the column: {}'.format(column.min()))
+  print('The mode value in the column: {}'.format(column.mode()))
+  print('The median value in the column: {}'.format(column.median()))
+  print('The mean of the column: {}'.format(column.mean()))
+  print('The std of the column: {}'.format(column.std()))
+
+series_statistics(df['Happiness_Score'])
+
+series_statistics(df['Cost_of_Living_Index'])
+
+series_statistics(df['Green_Space_Area'])
+
+df['Happiness_Score'].describe()
+
+df['Green_Space_Area'].describe()
+
+df[['Happiness_Score', 'Green_Space_Area', 'Air_Quality_Index']].describe()
+
+# histogram
+ax = sns.histplot(df['Happiness_Score'], bins=50, kde=True)
+ax = sns.histplot(df['Air_Quality_Index'], bins=50, kde=True)
+ax = sns.histplot(df['Green_Space_Area'], bins=50, kde=True)
+
+# Hypotheses 1:  Correlation - close to zero = no relationship   (Pearson correlation coefficient)
+df[['Happiness_Score', 'Green_Space_Area', 'Air_Quality_Index']].corr()
+
+#Hypotheses 1 Visual: Scatter Plot - Air Quality Index
+sns.scatterplot(y="Air_Quality_Index", x="Happiness_Score", data=df)
+
+# Scatter plot
+sns.scatterplot(x="Air_Quality_Index", y="Green_Space_Area", hue="Happiness_Score", size="Happiness_Score", data=df)
+
+# Pair Plot
+sns.pairplot(df)
+
+#Hypotheses 2: Correlation between cost of living and happiness scores
+df['Happiness_Score'].corr(df['Cost_of_Living_Index'])
+
+# Hypotheses 2: Independent-samples t-test
+# Install scipy if needed
+# Import Pandas, numpy and scipy
+
+# Correct data types of columns
+df['Happiness_Score'] = df['Happiness_Score'].astype(float)
+df['Cost_of_Living_Index'] = df['Cost_of_Living_Index'].astype(float)
+
+# Create two groups of data
+group1_data = df['Happiness_Score']
+group2_data = df['Cost_of_Living_Index']
+
+# Execute t-test
+t_statistic, p_value = stats.ttest_ind(group1_data, group2_data)
+
+print("t-statistic:", t_statistic)
+print("p-value:", p_value)
+
+
+
+
+
+
+
+
