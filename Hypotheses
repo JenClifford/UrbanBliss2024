@@ -1,0 +1,37 @@
+The Dataset
+
+The dataset being used for the following analysis was gathered from Kaggle at 2024-urban-bliss-index. The dataset is comprised of key features and metrics from diverse global cities. Focusing on factors that influence overall happiness, the dataset aims to unravel insights into urban living conditions and populace satisfaction.
+
+There are 545 records across ten fields. The four of the fields being used in this analysis are:
+
+happiness score  (max 8.6; min -122.9; mean -44.8)
+air quality index (max 245; min 5; mean 38)
+green space area (max 2425; min 5; mean 1085)
+cost of living index (max 130; min 20; mean 30)
+
+There are two questions that will be addressed in this analysis:
+
+Is there correlation between green space and air quality to happiness scores?
+
+Is there a significant impact of cost of living to happiness scores?
+
+The Hypotheses
+
+Hypothesis #1:  There is a correlation between green space area and air quality index to happiness scores. 
+
+This means that green space area and air quality index have an impact to happiness scores. 
+
+Hypothesis #2: There is a difference between cost of living and happiness scores. 
+
+Alternate Hypothesis (Ha)= there is a significant difference between cost of living and happiness scores. 
+Null Hypothesis (Ho) = there is no difference between cost of living and happiness scores
+
+The data will be used to test the hypotheses in the following way:
+
+Hypothesis #1 :  
+Analyze the correlation between green space area and air quality index to happiness scores. Pearson correlation coefficient that is more than .2 between the attributes will show a correlation and scatterplots will be use as a visual. Python and Tableau will be used accomplish this analysis. 
+
+Hypothesis #2 :
+Independent samples t-test to check for differences between cost of living and happiness scores. 
+The t-test will be accomplished using python in Collab Notebook.
+
